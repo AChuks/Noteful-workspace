@@ -9,6 +9,7 @@ noteRouter
         const knexInstance = req.app.get('db')
         NotesService.getAllNotes(knexInstance)
         .then(notes => {
+            
             res.json(notes.map(note => ({
                 id: note.id,
                 name: note.name,
@@ -16,6 +17,7 @@ noteRouter
                 content: note.content,
                 folderId: note.folderId
             })))
+            console.log(notes)
         })
         .catch(next)
 })
@@ -51,6 +53,7 @@ noteRouter
         req.app.get('db'),
         req.params.note_id
     )
+    console.log(req.params.note_id)
     .then(note => {
         if(!note) {
             return res.status(404).json({
