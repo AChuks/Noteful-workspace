@@ -34,9 +34,9 @@ folderRouter
             })
         }
         FoldersService.insertFolder(
-                req.app.get('db'),
-                newFolder
-            )
+            req.app.get('db'),
+            newFolder
+        )
             .then(folder => {
                 res
                     .status(201)
@@ -50,9 +50,9 @@ folderRouter
     .route('/:folder_id')
     .all((req, res, next) => {
         FoldersService.getById(
-                req.app.get('db'),
-                req.params.folder_id
-            )
+            req.app.get('db'),
+            req.params.folder_id
+        )
             .then(folder => {
                 if (!folder) {
                     return res.status(404).json({
@@ -77,9 +77,9 @@ folderRouter
     })
     .delete((req, res, next) => {
         FoldersService.deleteFolder(
-                req.app.get('db'),
-                req.params.folder_id
-            )
+            req.app.get('db'),
+            req.params.folder_id
+        )
             .then(numRowsAffectd => {
                 res.status(204).end()
             })
@@ -93,7 +93,7 @@ folderRouter
             name
         }
 
-        if (folderToUpdate == null) {
+        if (folderToUpdate.name == null) {
             return res.status(400).json({
                 error: {
                     message: `Request body must contain 'name'`
@@ -101,10 +101,10 @@ folderRouter
             })
         }
         FoldersService.updateFolder(
-                req.app.get('db'),
-                req.params.folder_id,
-                folderToUpdate
-            )
+            req.app.get('db'),
+            req.params.folder_id,
+            folderToUpdate
+        )
             .then(numRowsAffectd => {
                 res.status(204).end()
             })
